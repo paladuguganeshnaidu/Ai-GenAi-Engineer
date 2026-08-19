@@ -1,8 +1,12 @@
+import os
+
 import requests
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 
-API_KEY = "e10ac8dd89f5a364fb662ec1d518722f"
+API_KEY = os.environ.get("DETECT_LANGUAGE_API_KEY")
+if not API_KEY:
+    raise RuntimeError("DETECT_LANGUAGE_API_KEY is not set")
 
 texts = [
     "Hello, how are you?",

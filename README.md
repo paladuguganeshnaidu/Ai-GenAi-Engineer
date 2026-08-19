@@ -1,5 +1,45 @@
 # GEN-AI Roadmap
 
+## Repository Structure
+
+```text
+Learning/
+├── Machine_Learning/
+│   ├── Concepts/
+│   └── Projects/
+├── Neural_Networks/
+│   ├── Concepts/
+│   └── Projects/
+├── GPU_Engineering/Concepts/
+└── NLP/Concepts/
+
+Data/
+├── Raw/
+└── ResumeShortlister/
+	├── Training/
+	├── Testing/
+	└── Resumes/
+
+Projects/ResumeShortlister/
+├── Models/
+├── Results/
+├── Tests Results/
+└── *.py
+
+Tools/AI_Assistants/
+```
+
+Use the matching `Learning/<subject>/Concepts` folder for lessons, keep experiments in that subject's `Projects` folder, and store all datasets under `Data/`. Start with [Projects/ResumeShortlister/Readme.md](Projects/ResumeShortlister/Readme.md) for the complete ML workflow.
+
+### Environment variables
+
+The API examples read secrets from environment variables:
+
+```powershell
+$env:NEWS_API_KEY = "your-news-api-key"
+$env:DETECT_LANGUAGE_API_KEY = "your-detect-language-api-key"
+```
+
 This document combines two learning paths into a single structured plan:
 
 - Track A: AI Engineer with NLP and Computer Vision

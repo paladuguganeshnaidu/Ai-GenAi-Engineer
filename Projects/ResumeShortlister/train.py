@@ -15,7 +15,8 @@ from sklearn.metrics import (
 )
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = BASE_DIR / "Training Data"
+REPO_DIR = BASE_DIR.parents[1]
+DATA_DIR = REPO_DIR / "Data" / "ResumeShortlister" / "Training"
 MODELS_DIR = BASE_DIR / "Models"
 
 overall_start = time.perf_counter()

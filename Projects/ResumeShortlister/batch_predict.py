@@ -6,11 +6,12 @@ from pathlib import Path
 # Paths
 # =====================================================
 BASE_DIR = Path(__file__).resolve().parent
+REPO_DIR = BASE_DIR.parents[1]
 
 MODELS_DIR = BASE_DIR / "Models"
-DATA_DIR = BASE_DIR / "Training Data"
-TEST_DIR = BASE_DIR /"Testing Data"
-TEXT_RE= BASE_DIR / "Tests Results"
+DATA_DIR = REPO_DIR / "Data" / "ResumeShortlister" / "Training"
+TEST_DIR = REPO_DIR / "Data" / "ResumeShortlister" / "Testing"
+TEXT_RE = BASE_DIR / "Tests Results"
 RESULTS_DIR = BASE_DIR / "Results"
 
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)

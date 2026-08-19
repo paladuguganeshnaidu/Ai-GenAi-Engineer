@@ -66,7 +66,7 @@ Model Persistence:
 File:
 
 ```text
-Data/candidates.csv
+../../Data/ResumeShortlister/Training/candidates.csv
 ```
 
 Purpose:
@@ -108,7 +108,7 @@ Each record contains candidate information such as:
 File:
 
 ```text
-Data/test_candidates.csv
+../../Data/ResumeShortlister/Testing/test_candidates.csv
 ```
 
 Purpose:
@@ -128,7 +128,7 @@ This dataset contains unseen candidate profiles that are passed through the trai
 File:
 
 ```text
-Results/predictions.csv
+Tests Results/predictions.csv
 ```
 
 Generated automatically after batch prediction.
@@ -153,10 +153,6 @@ Example:
 ResumeShortlister/
 
 │
-├── Data/
-│   ├── candidates.csv
-│   └── test_candidates.csv
-│
 ├── Models/
 │   ├── resume_model.pkl
 │   ├── degree_encoder.pkl
@@ -165,6 +161,9 @@ ResumeShortlister/
 │   └── feature_columns.pkl
 │
 ├── Results/
+│   └── (training outputs)
+│
+├── Tests Results/
 │   └── predictions.csv
 │
 ├── train.py

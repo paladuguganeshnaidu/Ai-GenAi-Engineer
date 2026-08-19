@@ -1,10 +1,14 @@
+import json
+import os
+from pathlib import Path
+
 import requests
 
-import json
 
 
-
-API_KEY = "1f0349cbd2cf40dc941afcb15911976c"
+API_KEY = os.environ.get("NEWS_API_KEY")
+if not API_KEY:
+    raise RuntimeError("NEWS_API_KEY is not set")
 
 
 
@@ -58,10 +62,11 @@ for article in data["articles"]:
 
 
 
-with open("news.json", "w", encoding="utf-8") as file:
+output_file = Path(__file__).resolve().parents[3] / "Data" / "Raw" / "news.json"
+with output_file.open("w", encoding="utf-8") as file:
 
     json.dump(news, file, indent=4, ensure_ascii=False)
 
 
 
-print(f"Saved {len(news)} articles to news.json")
+print(f"Saved {len(news)} articles to {output_file}")

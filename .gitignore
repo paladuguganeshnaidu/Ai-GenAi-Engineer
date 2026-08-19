@@ -60,3 +60,9 @@ wandb/
 data/
 datasets/
 Projects/ResumeShortlister/Training Data/candidates.csv
+
+# The repository uses an uppercase, tracked Data/ directory.
+!Data/
+!Data/**
+Data/ResumeShortlister/Training/candidates.csv
+Data/ResumeShortlister/Training/__pycache__/

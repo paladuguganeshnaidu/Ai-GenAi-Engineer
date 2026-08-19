@@ -11,7 +11,7 @@ from tqdm import tqdm
 # CONFIGURATION
 # ==========================================================
 
-OUTPUT_FILE = "candidates.csv"
+OUTPUT_FILE = Path(__file__).resolve().parent / "candidates.csv"
 
 TOTAL_ROWS = 10_000_000
 
