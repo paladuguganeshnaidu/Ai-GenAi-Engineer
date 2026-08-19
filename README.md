@@ -20,7 +20,7 @@ Data/
 	├── Testing/
 	└── Resumes/
 
-Projects/ResumeShortlister/
+Learning/Machine_Learning/Projects/ResumeShortlister/
 ├── Models/
 ├── Results/
 ├── Tests Results/
@@ -29,7 +29,7 @@ Projects/ResumeShortlister/
 Tools/AI_Assistants/
 ```
 
-Use the matching `Learning/<subject>/Concepts` folder for lessons, keep experiments in that subject's `Projects` folder, and store all datasets under `Data/`. Start with [Projects/ResumeShortlister/Readme.md](Projects/ResumeShortlister/Readme.md) for the complete ML workflow.
+Use the matching `Learning/<subject>/Concepts` folder for lessons, keep experiments in that subject's `Projects` folder, and store all datasets under `Data/`. Start with [Learning/Machine_Learning/Projects/ResumeShortlister/Readme.md](Learning/Machine_Learning/Projects/ResumeShortlister/Readme.md) for the complete ML workflow.
 
 ### Environment variables
 

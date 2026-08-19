@@ -66,7 +66,7 @@ Model Persistence:
 File:
 
 ```text
-../../Data/ResumeShortlister/Training/candidates.csv
+../../../../Data/ResumeShortlister/Training/candidates.csv
 ```
 
 Purpose:
@@ -108,7 +108,7 @@ Each record contains candidate information such as:
 File:
 
 ```text
-../../Data/ResumeShortlister/Testing/test_candidates.csv
+../../../../Data/ResumeShortlister/Testing/test_candidates.csv
 ```
 
 Purpose:
@@ -150,7 +150,7 @@ Example:
 # Project Structure
 
 ```text
-ResumeShortlister/
+Learning/Machine_Learning/Projects/ResumeShortlister/
 
 │
 ├── Models/
@@ -363,7 +363,7 @@ This project demonstrates practical Machine Learning concepts including:
 
 Source Code:
 
-https://github.com/paladuguganeshnaidu/Ai-Engineer/tree/main/Projects/ResumeShortlister
+https://github.com/paladuguganeshnaidu/Ai-GenAi-Engineer/tree/main/Learning/Machine_Learning/Projects/ResumeShortlister
 
 ---
 
