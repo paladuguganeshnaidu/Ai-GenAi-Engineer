@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Engineer / GenAI-LLM Engineer — Master Roadmap</title>
+<meta name="description" content="A dependency-ordered roadmap from neural network foundations to a flagship production GenAI system.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Jost:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#050308;
+    --black-2:#0a0710;
+    --panel:#0f0a18;
+    --panel-2:#140d20;
+    --line:rgba(155,110,255,0.16);
+    --line-strong:rgba(155,110,255,0.35);
+    --violet-deep:#2a0e52;
+    --violet:#8b3ffa;
+    --violet-bright:#b98bff;
+    --violet-soft:#c9a6ff;
+    --ink:#f3eefc;
+    --ink-dim:#b7abd0;
+    --ink-faint:#6f6488;
+
+    --c-done:#3ddc97;
+    --c-current:#ffb84d;
+    --c-next:#c9a6ff;
+    --c-must:#ff5c96;
+    --c-required:#b388ff;
+    --c-good:#9d8fc4;
+    --c-lab:#7c6fae;
+    --c-critical:#ff3d78;
+
+    --disp:'Cinzel', serif;
+    --body:'Jost', sans-serif;
+    --mono:'Space Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(1100px 620px at 82% -8%, rgba(139,63,250,0.20), transparent 60%),
+      radial-gradient(900px 500px at -10% 15%, rgba(90,20,150,0.16), transparent 55%),
+      radial-gradient(700px 900px at 100% 100%, rgba(139,63,250,0.10), transparent 60%),
+      var(--black);
+    color:var(--ink);
+    font-family:var(--body);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  ::selection{background:var(--violet); color:#fff;}
+
+  a{color:var(--violet-soft);}
+
+  :focus-visible{
+    outline:2px solid var(--violet-bright);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  h1,h2,h3,h4{
+    font-family:var(--disp);
+    color:#fff;
+    margin:0;
+    letter-spacing:0.04em;
+  }
+
+  p{margin:0;}
+
+  ul{list-style:none; margin:0; padding:0;}
+
+  /* ---------- texture overlay ---------- */
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:2; opacity:0.04; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- top progress rail ---------- */
+  .rail{
+    position:fixed; top:0; left:0; right:0; height:3px; z-index:50;
+    background:rgba(255,255,255,0.04);
+  }
+  .rail-fill{
+    height:100%; width:0%;
+    background:linear-gradient(90deg, var(--violet-deep), var(--violet), var(--violet-bright));
+    box-shadow:0 0 12px rgba(185,139,255,0.7);
+    transition:width .5s ease;
+  }
+
+  /* ---------- header / nav bar ---------- */
+  .topbar{
+    position:sticky; top:3px; z-index:40;
+    display:flex; align-items:center; gap:14px;
+    padding:12px 20px;
+    background:rgba(6,4,12,0.72);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .mark{
+    font-family:var(--disp); font-weight:700; font-size:15px; letter-spacing:0.18em;
+    color:#fff; white-space:nowrap;
+  }
+  .topbar .mark span{color:var(--violet-soft);}
+  .topbar-spacer{flex:1;}
+  .jumpnav{
+    appearance:none;
+    background:var(--panel);
+    color:var(--ink);
+    border:1px solid var(--line-strong);
+    border-radius:8px;
+    padding:8px 34px 8px 12px;
+    font-family:var(--body);
+    font-size:13px;
+    letter-spacing:0.03em;
+    cursor:pointer;
+    background-image:linear-gradient(45deg, transparent 50%, var(--violet-soft) 50%), linear-gradient(135deg, var(--violet-soft) 50%, transparent 50%);
+    background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+    background-size:5px 5px, 5px 5px;
+    background-repeat:no-repeat;
+    max-width:230px;
+  }
+  .jumpnav:hover{border-color:var(--violet-bright);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    padding:90px 20px 60px;
+    max-width:1080px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .hero .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.35em;
+    color:var(--violet-soft);
+    text-transform:uppercase;
+    margin-bottom:22px;
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(34px, 6vw, 68px);
+    line-height:1.08;
+    text-shadow:0 0 40px rgba(139,63,250,0.35);
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(120deg, var(--violet-soft), var(--violet-bright), #fff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero .sub{
+    margin:22px auto 0;
+    max-width:640px;
+    color:var(--ink-dim);
+    font-weight:300;
+    font-size:16px;
+  }
+
+  .strategy{
+    margin:34px auto 0;
+    display:flex; flex-wrap:wrap; justify-content:center; gap:0;
+    font-family:var(--mono); font-size:11.5px; letter-spacing:0.08em;
+    color:var(--ink-dim);
+  }
+  .strategy span{padding:6px 10px; white-space:nowrap;}
+  .strategy .arrow{color:var(--violet); opacity:0.7;}
+
+  .meta-chips{
+    margin:36px auto 0;
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+  }
+  .chip{
+    border:1px solid var(--line-strong);
+    background:var(--panel);
+    border-radius:999px;
+    padding:9px 16px;
+    font-size:12.5px;
+    color:var(--ink-dim);
+    display:flex; gap:7px; align-items:center;
+  }
+  .chip b{color:#fff; font-weight:500;}
+  .chip .dot{width:6px; height:6px; border-radius:50%; background:var(--violet-bright); box-shadow:0 0 8px var(--violet-bright);}
+
+  .progress-hero{
+    max-width:520px; margin:40px auto 0;
+  }
+  .progress-hero .pline{
+    display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--ink-faint); margin-bottom:8px; letter-spacing:0.05em;
+  }
+  .progress-hero .pline b{color:var(--violet-soft); font-weight:700;}
+  .progress-track{height:8px; border-radius:6px; background:rgba(255,255,255,0.05); border:1px solid var(--line); overflow:hidden;}
+  .progress-track .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--violet-deep),var(--violet),var(--violet-bright)); box-shadow:0 0 10px rgba(185,139,255,0.6); transition:width .8s ease;}
+  .hint{margin-top:10px; font-size:11px; color:var(--ink-faint); font-style:normal;}
+
+  /* ---------- philosophy pull-quote ---------- */
+  .philosophy{
+    max-width:760px; margin:70px auto; padding:0 20px; text-align:center; position:relative;
+  }
+  .philosophy .glyph{font-family:var(--disp); font-size:50px; color:var(--violet-deep); line-height:1; margin-bottom:6px;}
+  .philosophy p{
+    font-family:var(--disp); font-weight:400; font-size:clamp(18px,2.6vw,26px); color:var(--ink); line-height:1.5;
+  }
+  .philosophy p b{color:var(--violet-soft); font-weight:600;}
+  .philosophy small{display:block; margin-top:18px; color:var(--ink-faint); font-family:var(--mono); font-size:11px; letter-spacing:0.06em;}
+
+  /* ---------- section shells ---------- */
+  section.wrap{max-width:1080px; margin:0 auto; padding:10px 20px 90px;}
+  .section-head{margin-bottom:36px;}
+  .section-head .k{font-family:var(--mono); font-size:11px; letter-spacing:0.3em; color:var(--violet-soft); text-transform:uppercase;}
+  .section-head h2{font-size:clamp(24px,3.4vw,34px); margin-top:10px;}
+  .section-head p{color:var(--ink-dim); margin-top:10px; max-width:640px; font-size:14.5px;}
+
+  /* ---------- final-target grid ---------- */
+  .target-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:10px 22px;
+  }
+  .target-grid li{
+    display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--ink-dim); padding:6px 0; border-bottom:1px dashed var(--line);
+  }
+  .target-grid li::before{content:"◆"; color:var(--violet); font-size:9px; margin-top:6px;}
+
+  /* ---------- spine / phases ---------- */
+  .spine{position:relative; padding-left:38px;}
+  .spine::before{
+    content:""; position:absolute; left:11px; top:6px; bottom:6px; width:2px;
+    background:linear-gradient(180deg, var(--violet-deep), var(--violet) 40%, var(--violet-deep) 90%);
+    opacity:0.55;
+  }
+  @media (max-width:640px){ .spine{padding-left:26px;} .spine::before{left:7px;} }
+
+  .phase{
+    position:relative;
+    margin-bottom:26px;
+    background:linear-gradient(160deg, var(--panel), var(--panel-2));
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px 26px 24px;
+    opacity:0; transform:translateY(18px);
+    transition:opacity .6s ease, transform .6s ease, border-color .3s ease;
+  }
+  .phase.in{opacity:1; transform:translateY(0);}
+  .phase:hover{border-color:var(--line-strong);}
+
+  .phase .node{
+    position:absolute; left:-38px; top:30px; width:14px; height:14px; border-radius:50%;
+    background:var(--black); border:2px solid var(--violet); box-shadow:0 0 0 4px rgba(139,63,250,0.12);
+  }
+  @media (max-width:640px){ .phase .node{left:-26px; width:11px; height:11px;} }
+
+  .phase[data-status="done"] .node{border-color:var(--c-done); box-shadow:0 0 10px var(--c-done), 0 0 0 4px rgba(61,220,151,0.14);}
+  .phase[data-status="current"] .node{border-color:var(--c-current); box-shadow:0 0 12px var(--c-current), 0 0 0 4px rgba(255,184,77,0.16);}
+  .phase[data-status="critical"] .node{border-color:var(--c-critical); box-shadow:0 0 10px var(--c-critical);}
+
+  .phase[data-status="current"]{
+    border-color:rgba(255,184,77,0.5);
+    animation:pulseGlow 2.8s ease-in-out infinite;
+  }
+  @keyframes pulseGlow{
+    0%,100%{box-shadow:0 0 0 rgba(255,184,77,0);}
+    50%{box-shadow:0 0 26px rgba(255,184,77,0.18);}
+  }
+
+  .phase-top{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .phase-title-wrap{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;}
+  .phase-num{
+    font-family:var(--mono); font-size:13px; color:var(--ink-faint); letter-spacing:0.1em;
+  }
+  .phase h3{font-size:clamp(18px,2.4vw,23px); font-weight:600;}
+
+  .badge{
+    font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+    padding:5px 10px; border-radius:999px; border:1px solid; white-space:nowrap;
+  }
+  .badge[data-status="done"]{color:var(--c-done); border-color:rgba(61,220,151,0.4); background:rgba(61,220,151,0.07);}
+  .badge[data-status="current"]{color:var(--c-current); border-color:rgba(255,184,77,0.45); background:rgba(255,184,77,0.08);}
+  .badge[data-status="next"]{color:var(--c-next); border-color:rgba(201,166,255,0.4); background:rgba(201,166,255,0.06);}
+  .badge[data-status="must"]{color:var(--c-must); border-color:rgba(255,92,150,0.4); background:rgba(255,92,150,0.07);}
+  .badge[data-status="required"]{color:var(--c-required); border-color:rgba(179,136,255,0.4); background:rgba(179,136,255,0.07);}
+  .badge[data-status="good"]{color:var(--c-good); border-color:rgba(157,143,196,0.4); background:rgba(157,143,196,0.06);}
+  .badge[data-status="lab"]{color:var(--c-lab); border-color:rgba(124,111,174,0.45); background:rgba(124,111,174,0.08);}
+  .badge[data-status="critical"]{color:var(--c-critical); border-color:rgba(255,61,120,0.5); background:rgba(255,61,120,0.09);}
+
+  .phase-progress{margin-bottom:20px;}
+  .phase-progress .track{height:5px; border-radius:4px; background:rgba(255,255,255,0.05); overflow:hidden;}
+  .phase-progress .fill{height:100%; width:0%; transition:width .6s ease; background:linear-gradient(90deg,var(--violet-deep),var(--violet-bright));}
+  .phase-progress .label{font-family:var(--mono); font-size:10px; color:var(--ink-faint); margin-top:5px; letter-spacing:0.05em;}
+
+  .block{margin-top:18px;}
+  .block-h{font-family:var(--body); font-weight:600; font-size:12.5px; letter-spacing:0.08em; color:var(--violet-soft); text-transform:uppercase; margin-bottom:10px;}
+
+  .checklist{display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:4px 18px;}
+  .check-item{
+    display:flex; align-items:flex-start; gap:10px; padding:7px 6px; border-radius:7px; cursor:pointer;
+    font-size:13.5px; color:var(--ink-dim); transition:background .2s ease, color .2s ease;
+  }
+  .check-item:hover{background:rgba(255,255,255,0.03);}
+  .check-item .box{
+    flex:0 0 15px; width:15px; height:15px; margin-top:2px; border-radius:4px;
+    border:1.5px solid var(--ink-faint); position:relative; transition:all .2s ease;
+  }
+  .check-item.done .box{border-color:var(--c-done); background:rgba(61,220,151,0.12);}
+  .check-item.done .box::after{
+    content:""; position:absolute; left:3px; top:0px; width:4px; height:8px;
+    border:solid var(--c-done); border-width:0 2px 2px 0; transform:rotate(40deg);
+  }
+  .check-item.done .txt{color:var(--ink); opacity:0.72;}
+
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:6px;}
+  .flow-step{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:0.03em; color:var(--violet-soft);
+    background:rgba(139,63,250,0.08); border:1px solid var(--line-strong); border-radius:6px; padding:6px 10px;
+    white-space:nowrap;
+  }
+  .flow-arrow{color:var(--violet); font-size:13px; opacity:0.65;}
+
+  .callout{
+    margin-top:18px; border-radius:10px; padding:14px 16px;
+    border:1px solid var(--line-strong); background:rgba(139,63,250,0.045);
+  }
+  .callout-tag{
+    display:inline-block; font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--violet-soft); margin-bottom:8px;
+  }
+  .callout p{color:var(--ink-dim); font-size:13.5px; line-height:1.65;}
+  .callout-warn{border-color:rgba(255,92,150,0.3); background:rgba(255,92,150,0.05);}
+  .callout-warn .callout-tag{color:var(--c-must);}
+  .callout-warn ul li{color:var(--ink-dim); font-size:13.5px; padding:3px 0; position:relative; padding-left:16px;}
+  .callout-warn ul li::before{content:"✕"; position:absolute; left:0; color:var(--c-must); font-size:10px; top:6px;}
+
+  .callout-project{border-color:rgba(255,184,77,0.3); background:rgba(255,184,77,0.045);}
+  .callout-project .callout-tag{color:var(--c-current);}
+  .chip-list{display:flex; flex-wrap:wrap; gap:7px;}
+  .chip-list li{
+    font-size:12px; font-family:var(--mono); color:var(--ink); background:rgba(255,255,255,0.05);
+    border:1px solid var(--line); padding:5px 10px; border-radius:6px;
+  }
+  .project-extra{margin-top:10px; font-size:13px; color:var(--ink-dim); font-style:italic;}
+
+  .callout-highlight{border-color:rgba(255,61,120,0.35); background:rgba(255,61,120,0.05);}
+  .callout-highlight .callout-tag{color:var(--c-critical);}
+
+  /* ---------- portfolio ---------- */
+  .proj-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;}
+  .proj-card{
+    border:1px solid var(--line); border-radius:14px; padding:22px;
+    background:linear-gradient(160deg, var(--panel), var(--panel-2));
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .proj-card:hover{transform:translateY(-4px); border-color:var(--line-strong);}
+  .proj-card .pn{font-family:var(--mono); font-size:11px; color:var(--violet-soft); letter-spacing:0.1em;}
+  .proj-card h4{font-size:17px; margin:8px 0 12px; font-weight:600;}
+  .proj-card ul{display:flex; flex-wrap:wrap; gap:6px;}
+  .proj-card ul li{
+    font-size:11px; font-family:var(--mono); color:var(--ink-dim); border:1px solid var(--line); border-radius:5px; padding:4px 8px;
+  }
+  .proj-card.flagship{
+    grid-column:1/-1; border-color:rgba(255,61,120,0.35); background:linear-gradient(160deg, rgba(255,61,120,0.06), var(--panel-2));
+  }
+
+  .required-box{
+    margin-top:26px; border:1px dashed var(--line-strong); border-radius:12px; padding:20px;
+  }
+  .required-box h4{font-size:13px; letter-spacing:0.1em; color:var(--violet-soft); text-transform:uppercase; margin-bottom:12px; font-family:var(--body); font-weight:600;}
+  .required-box .checklist{grid-template-columns:repeat(auto-fill, minmax(200px,1fr));}
+
+  /* ---------- interview ---------- */
+  .framework{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:12px; margin-bottom:34px;}
+  .fw-card{border:1px solid var(--line); border-radius:12px; padding:16px; text-align:center; background:var(--panel);}
+  .fw-card .w{font-family:var(--disp); font-weight:700; color:var(--violet-bright); font-size:15px; letter-spacing:0.08em;}
+  .fw-card .q{font-size:12px; color:var(--ink-dim); margin-top:8px; line-height:1.5;}
+
+  .topic-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px;}
+  .topic-card{border:1px solid var(--line); border-radius:12px; padding:18px; background:var(--panel);}
+  .topic-card h4{font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#fff; margin-bottom:12px; font-family:var(--body); font-weight:600;}
+  .topic-card ul li{font-size:13px; color:var(--ink-dim); padding:4px 0; padding-left:14px; position:relative;}
+  .topic-card ul li::before{content:"—"; position:absolute; left:0; color:var(--violet);}
+
+  /* ---------- depth control ---------- */
+  .depth-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;}
+  .depth-card{border-radius:14px; padding:22px; border:1px solid var(--line);}
+  .depth-card .tag{font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase;}
+  .depth-card h4{margin-top:8px; font-size:16px;}
+  .depth-card p{margin-top:10px; font-size:12.5px; color:var(--ink-dim); line-height:1.7;}
+  .depth-card.must{border-color:rgba(255,92,150,0.35); background:rgba(255,92,150,0.04);}
+  .depth-card.must .tag{color:var(--c-must);}
+  .depth-card.good{border-color:rgba(157,143,196,0.35); background:rgba(157,143,196,0.04);}
+  .depth-card.good .tag{color:var(--c-good);}
+  .depth-card.opt{border-color:rgba(111,100,136,0.35); background:rgba(111,100,136,0.04);}
+  .depth-card.opt .tag{color:var(--ink-faint);}
+
+  /* ---------- stop rule ---------- */
+  .stoprule{
+    text-align:center; border:1px solid rgba(255,61,120,0.35); border-radius:18px;
+    padding:44px 24px; background:radial-gradient(600px 260px at 50% 0%, rgba(255,61,120,0.08), transparent 70%);
+  }
+  .stoprule .glyph{font-family:var(--disp); font-size:13px; letter-spacing:0.4em; color:var(--c-critical); text-transform:uppercase;}
+  .stoprule h2{margin-top:14px; font-size:clamp(22px,3vw,30px);}
+  .stoprule ol{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:26px 0; padding:0;}
+  .stoprule ol li{
+    font-family:var(--mono); font-size:12px; color:var(--ink-dim); border:1px solid var(--line-strong);
+    border-radius:999px; padding:8px 16px; list-style:none;
+  }
+  .stoprule ol li b{color:var(--violet-soft);}
+  .stoprule p{max-width:520px; margin:0 auto; color:var(--ink-dim); font-size:14px; font-style:italic;}
+
+  /* ---------- final order ---------- */
+  .order-list{display:flex; flex-direction:column; gap:0; max-width:520px; margin:0 auto;}
+  .order-item{
+    display:flex; align-items:center; gap:14px; padding:11px 0; border-bottom:1px solid var(--line);
+    font-size:13.5px; color:var(--ink-dim);
+  }
+  .order-item .oi{font-family:var(--mono); font-size:11px; color:var(--ink-faint); width:24px; flex:0 0 24px;}
+  .order-item.job{color:#fff; font-weight:500;}
+  .order-item.job .oi{color:var(--c-critical);}
+
+  /* ---------- footer ---------- */
+  footer{
+    text-align:center; padding:60px 20px 80px; color:var(--ink-faint); font-size:12.5px;
+    border-top:1px solid var(--line); margin-top:20px;
+  }
+  footer a{color:var(--violet-soft); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+  footer .fmark{font-family:var(--disp); color:var(--ink-dim); letter-spacing:0.15em; font-size:12px; margin-bottom:10px;}
+
+  /* ---------- back to top ---------- */
+  #toTop{
+    position:fixed; right:18px; bottom:18px; z-index:45;
+    width:42px; height:42px; border-radius:50%;
+    background:var(--panel); border:1px solid var(--line-strong); color:var(--violet-soft);
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    opacity:0; pointer-events:none; transform:translateY(10px);
+    transition:opacity .3s ease, transform .3s ease, border-color .3s ease;
+    font-size:16px;
+  }
+  #toTop.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+  #toTop:hover{border-color:var(--violet-bright);}
+
+  @media (max-width:640px){
+    .topbar{padding:10px 14px;}
+    .hero{padding:70px 16px 40px;}
+    .checklist{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="rail"><div class="rail-fill" id="railFill"></div></div>
+
+<div class="topbar">
+  <div class="mark">GANESH <span>/// ROADMAP</span></div>
+  <div class="topbar-spacer"></div>
+  <select class="jumpnav" id="jumpnav" aria-label="Jump to section"></select>
+</div>
+
+<header class="hero">
+  <span class="eyebrow">Master Roadmap · AI Engineer + GenAI / LLM Engineer</span>
+  <h1>Learn. Build. <em>Ship.</em><br>Get the job.</h1>
+  <p class="sub">One dependency-ordered path — not two separate courses. Every topic earns its place only if it helps me build, debug, explain, optimize, deploy, or interview.</p>
+
+  <div class="strategy">
+    <span>LEARN</span><span class="arrow">→</span>
+    <span>BUILD</span><span class="arrow">→</span>
+    <span>DEBUG</span><span class="arrow">→</span>
+    <span>EXPLAIN</span><span class="arrow">→</span>
+    <span>OPTIMIZE</span><span class="arrow">→</span>
+    <span>DEPLOY</span><span class="arrow">→</span>
+    <span>INTERVIEW</span><span class="arrow">→</span>
+    <span>GET THE JOB</span>
+  </div>
+
+  <div class="meta-chips">
+    <div class="chip"><span class="dot"></span>Deadline <b>Feb / Mar 2027</b></div>
+    <div class="chip"><span class="dot"></span>Primary <b>GenAI / LLM Engineering</b></div>
+    <div class="chip"><span class="dot"></span>Supporting <b>AI Foundations + Selected NLP/CV</b></div>
+    <div class="chip"><span class="dot"></span>Hardware <b>NVIDIA DGX Spark</b></div>
+  </div>
+
+  <div class="progress-hero">
+    <div class="pline"><span>Overall progress</span><b id="overallPct">0%</b></div>
+    <div class="progress-track"><div class="fill" id="overallFill"></div></div>
+    <div class="hint">Tap any checklist item to toggle it — visual only, resets on reload. Edit the data in this file to save real progress.</div>
+  </div>
+</header>
+
+<section class="philosophy">
+  <div class="glyph">”</div>
+  <p>I am <b>not</b> studying two separate courses. I am following <b>one</b> dependency-based roadmap — GenAI/LLM engineering as the primary track, AI foundations as the supporting structure beneath it. If a topic does not significantly contribute to building, debugging, explaining, optimizing, deploying, or interviewing — reduce it, learn only the concept, or skip it.</p>
+  <small>MASTER ROADMAP PHILOSOPHY</small>
+</section>
+
+<section class="wrap" id="target">
+  <div class="section-head">
+    <span class="k">Final Target</span>
+    <h2>By February / March 2027, I should be able to —</h2>
+  </div>
+  <ul class="target-grid" id="targetGrid"></ul>
+</section>
+
+<section class="wrap" id="phases">
+  <div class="section-head">
+    <span class="k">The Dependency Chain</span>
+    <h2>Phase 00 → Phase 27</h2>
+    <p>Twenty-eight phases, in strict order. Each one only unlocks the next because the roadmap is built on real prerequisites — not an arbitrary list.</p>
+  </div>
+  <div class="spine" id="spine"></div>
+</section>
+
+<section class="wrap" id="tracks">
+  <div class="section-head">
+    <span class="k">Running Alongside</span>
+    <h2>Parallel Tracks</h2>
+    <p>These never become second curricula. They run in the background of every phase above.</p>
+  </div>
+  <div class="spine" id="tracksSpine"></div>
+</section>
+
+<section class="wrap" id="portfolio">
+  <div class="section-head">
+    <span class="k">Proof of Work</span>
+    <h2>Portfolio Plan</h2>
+    <p>Five projects. Each one is the receipt for a block of the roadmap above.</p>
+  </div>
+  <div class="proj-grid" id="projGrid"></div>
+
+  <div class="required-box">
+    <h4>Every project must have</h4>
+    <ul class="checklist" id="everyProjectGrid"></ul>
+  </div>
+</section>
+
+<section class="wrap" id="interview">
+  <div class="section-head">
+    <span class="k">Say It Out Loud</span>
+    <h2>Interview Preparation</h2>
+    <p>Start early. For every topic on this page, run it through the same seven questions.</p>
+  </div>
+  <div class="framework" id="frameworkGrid"></div>
+  <div class="topic-grid" id="topicGrid"></div>
+</section>
+
+<section class="wrap" id="depth">
+  <div class="section-head">
+    <span class="k">Depth Control</span>
+    <h2>How deep is deep enough?</h2>
+    <p>Every topic on this page gets exactly one of these three labels.</p>
+  </div>
+  <div class="depth-grid" id="depthGrid"></div>
+</section>
+
+<section class="wrap" id="stop">
+  <div class="stoprule">
+    <span class="glyph">Stop Rule</span>
+    <h2>If I can do these five things —</h2>
+    <ol>
+      <li><b>01</b> Explain it</li>
+      <li><b>02</b> Implement it</li>
+      <li><b>03</b> Debug it</li>
+      <li><b>04</b> Use it in a project</li>
+      <li><b>05</b> Explain the tradeoffs</li>
+    </ol>
+    <p>— stop here. Move to the next dependency. Do not keep studying a topic just because it is interesting.</p>
+  </div>
+</section>
+
+<section class="wrap" id="order">
+  <div class="section-head">
+    <span class="k">The Whole Path, End to End</span>
+    <h2>Final Roadmap Order</h2>
+  </div>
+  <div class="order-list" id="orderList"></div>
+</section>
+
+<div id="toTop" title="Back to top">↑</div>
+
+<footer>
+  <div class="fmark">GANESH · AI / GenAI ENGINEER ROADMAP</div>
+  <p><a href="https://github.com/paladuganeshnaidu" target="_blank" rel="noopener">github.com/paladuganeshnaidu</a> · Built for one purpose: get job-ready.</p>
+</footer>
+
+<script>
+/* ============================================================
+   DATA
+   ============================================================ */
+const STATUS_LABEL = {
+  done:"Completed", current:"Current phase", next:"Next up", must:"Must-know",
+  required:"Required", good:"Supporting", lab:"Parallel track", critical:"Critical"
+};
+
+const phases = [
+{n:"00", t:"Foundations — Already Completed", s:"done", sl:"COMPLETED", b:[
+  {k:"cl", h:"0.1 Python", i:[["Python syntax",1],["Variables & data types",1],["Conditions",1],["Loops",1],["Functions",1],["Data structures",1],["Modules",1],["File handling",1],["OOP fundamentals",1],["Virtual environments",1],["Practical Python programming",1]]},
+  {k:"cl", h:"0.2 Development Environment", i:[["VS Code",1],["Python virtual environments",1],["pip / package management",1],["Project structures",1],["Git",1],["GitHub",1],["Basic repository workflow",1]]},
+  {k:"cl", h:"0.3 SQL", i:[["SELECT",1],["WHERE",1],["GROUP BY",1],["HAVING",1],["JOIN",1],["Aggregation",1],["Basic SQL problem solving",1],["Practical database querying",1]]},
+  {k:"cl", h:"0.4 Machine Learning Foundations", i:[["What is Machine Learning",1],["Supervised learning",1],["Unsupervised learning",1],["Regression",1],["Classification",1],["Clustering",1],["Train/test split",1],["Model evaluation",1],["Accuracy",1],["Precision",1],["Recall",1],["F1 score",1],["Confusion matrix",1],["scikit-learn workflow",1],["Practical ML project experience",1]]},
+  {k:"note", x:"Do not restart ML from zero. Only revisit concepts when required by a project or interview."}
+]},
+{n:"01", t:"Neural Network Foundations", s:"done", sl:"COMPLETED", b:[
+  {k:"cl", h:"1.1 Artificial Neuron", i:[["Inputs",1],["Weights",1],["Bias",1],["Weighted sum",1],["Neuron output",1]]},
+  {k:"cl", h:"1.2 Forward Pass", i:[["Weighted sum",1],["Activation",1],["Prediction",1]]},
+  {k:"cl", h:"1.3 Loss", i:[["Purpose of loss",1],["Prediction vs target",1],["Loss calculation",1]]},
+  {k:"cl", h:"1.4 Gradient Descent", i:[["Gradient concept",1],["Parameter update",1],["Learning process",1]]},
+  {k:"cl", h:"1.5 Derivatives / Chain Rule", i:[["Derivative intuition",1],["Chain rule",1],["Practical gradient calculation",1]]},
+  {k:"cl", h:"1.6 Backpropagation", i:[["Gradient flow",1],["Backpropagation",1],["Gradient accumulation",1],["Parameter update",1]]}
+]},
+{n:"02", t:"Activation Functions", s:"current", sl:"CURRENT PHASE", b:[
+  {k:"cl", i:[["Step Function — basic understanding",1],["Sigmoid — implementation / understanding",1],["Tanh — understanding",1],["ReLU — introduced",1],["Leaky ReLU",0],["Softmax",0]]},
+  {k:"note", x:"For each activation, learn only: What? Why? Advantage? Problem? Where used? Tiny implementation."},
+  {k:"warn", h:"Do not", i:["Deep mathematical proofs","Research-level derivations","Historical rabbit holes"]}
+]},
+{n:"03", t:"Multi-Layer Neural Network", s:"next", sl:"NEXT", b:[
+  {k:"cl", i:[["Input layer",0],["Hidden layer",0],["Multiple neurons",0],["Multiple layers",0],["Output layer",0],["Forward propagation",0],["Activation",0],["Loss",0],["Backpropagation",0],["Parameter updates",0],["Mini-batch concept",0]]},
+  {k:"flow", h:"Main objective", i:["INPUT","WEIGHTS + BIASES","HIDDEN LAYERS","ACTIVATION","OUTPUT","LOSS","BACKPROPAGATION","UPDATE"]},
+  {k:"project", h:"Build", i:["Small multi-layer classifier — no NumPy, no PyTorch, from scratch"]}
+]},
+{n:"04", t:"NumPy for AI", s:"next", sl:"NEXT", b:[
+  {k:"cl", i:[["Arrays",0],["Shape",0],["Dimensions",0],["Indexing",0],["Broadcasting",0],["Vectorization",0],["Matrix multiplication",0],["Dot product",0],["Reshaping",0],["Batch operations",0]]},
+  {k:"flow", h:"Rebuild the neural network", i:["FOR-LOOP BASED NETWORK","NUMPY MATRIX BASED NETWORK"]},
+  {k:"note", x:"Main objective: understand how neural networks operate on vectors → matrices → batches."}
+]},
+{n:"05", t:"PyTorch", s:"must", sl:"MUST-KNOW", b:[
+  {k:"cl", h:"5.1 PyTorch Core — foundation completed", i:[["Basic PyTorch usage",1],["Tensor creation",1],["Tensor shapes",1],["Basic tensor operations",1],["Basic preprocessing workflow",1]]},
+  {k:"cl", h:"5.2 PyTorch Deep Learning Workflow — must complete", i:[["Tensor datasets",0],["Dataset",0],["DataLoader",0],["Batch processing",0],["nn.Module",0],["__init__",0],["forward()",0],["Loss functions",0],["Optimizers",0],["Autograd",0],["Training loop",0],["Validation loop",0],["Metrics",0],["Saving models",0],["Loading models",0],["Inference",0]]},
+  {k:"flow", h:"Standard workflow", i:["DATA","Dataset","DataLoader","Model","Forward Pass","Loss","loss.backward()","Optimizer","optimizer.step()","Validation","Save Model"]}
+]},
+{n:"06", t:"CPU + GPU Engineering", s:"must", sl:"MUST COMPLETE", b:[
+  {k:"cl", i:[["CPU vs GPU",0],["CUDA",0],["CUDA availability",0],["Device selection",0],["Moving tensors to GPU",0],["Moving models to GPU",0],["GPU memory",0],["Batch size",0],["GPU utilization",0],["Training time",0],["Inference time",0]]},
+  {k:"cl", h:"DGX Spark Lab — same model, CPU vs GPU", i:[["Training time",0],["Inference time",0],["Batch size",0],["Memory usage",0],["Throughput",0]]},
+  {k:"project", h:"Build", i:["Benchmark report: CPU vs GPU"]},
+  {k:"callout", h:"Interview question", x:"“Why is GPU faster for deep learning?” — be able to explain this clearly."}
+]},
+{n:"07", t:"Computer Vision Support", s:"good", sl:"SUPPORTING KNOWLEDGE", b:[
+  {k:"note", x:"CV is not a second major track — learn only what supports AI engineering."},
+  {k:"cl", h:"CNN", i:[["Convolution",0],["Kernel / filter",0],["Feature maps",0],["Stride",0],["Padding",0],["Pooling",0],["CNN architecture",0],["Training CNN in PyTorch",0]]},
+  {k:"project", h:"Practical", i:["CNN → MNIST / CIFAR-10 classifier"]},
+  {k:"cl", h:"Transfer Learning", i:[["Pretrained models",0],["ResNet",0],["Feature extraction",0],["Fine-tuning",0],["Data augmentation",0],["Overfitting",0],["Dropout",0],["Batch normalization",0]]},
+  {k:"cl", h:"Optional support", i:[["OpenCV basics",0],["Image preprocessing",0],["Object detection concepts",0],["YOLO concepts",0],["IoU",0],["mAP",0]]},
+  {k:"warn", h:"Do not spend months on", i:["Advanced CV architectures","Multiple CV projects","Deep segmentation theory","Research-level vision"]}
+]},
+{n:"08", t:"NLP Foundations", s:"required", sl:"REQUIRED FOUNDATION", b:[
+  {k:"cl", h:"Text", i:[["Text cleaning",0],["Tokenization",0],["Vocabulary",0],["Padding",0],["Truncation",0],["Special tokens",0],["Sequence representation",0]]},
+  {k:"cl", h:"Embeddings", i:[["Word embeddings",0],["Vector representation",0],["Similarity",0],["Cosine similarity",0],["Semantic meaning",0]]},
+  {k:"cl", h:"Sequence Models", i:[["RNN concept",0],["Vanishing gradient",0],["LSTM concept",0],["GRU concept",0]]},
+  {k:"note", x:"RNN / LSTM = conceptual foundation only. Do not spend weeks mastering them."}
+]},
+{n:"09", t:"Transformers", s:"critical", sl:"MOST IMPORTANT PHASE", b:[
+  {k:"cl", i:[["Why Transformers",0],["Sequence problem",0],["Attention",0],["Self-attention",0],["Query",0],["Key",0],["Value",0],["Attention scores",0],["Scaled dot-product attention",0],["Multi-head attention",0],["Positional encoding",0],["Feed-forward network",0],["Residual connections",0],["Layer normalization",0],["Encoder",0],["Decoder",0],["Encoder-decoder architecture",0]]},
+  {k:"note", x:"Understand BERT vs GPT vs Encoder-Decoder Transformers."},
+  {k:"project", h:"Practical", i:["Implement small self-attention, then PyTorch / Hugging Face"]},
+  {k:"callout", h:"Stop rule for this phase", x:"Once you can explain attention, explain transformer architecture, implement basic attention, explain BERT vs GPT, and explain why Transformers replaced RNNs — stop. Do not enter research-level Transformer mathematics."}
+]},
+{n:"10", t:"Hugging Face", s:"required", sl:"REQUIRED", b:[
+  {k:"cl", i:[["Hugging Face ecosystem",0],["Transformers library",0],["Tokenizers",0],["Pretrained models",0],["Pipelines",0],["AutoTokenizer",0],["AutoModel",0],["Model loading",0],["Tokenization",0],["Inference",0],["Hugging Face datasets",0],["Model configuration",0],["Model cards",0]]},
+  {k:"flow", h:"Practical", i:["BERT / DistilBERT","Tokenize","Inference","Evaluate"]}
+]},
+{n:"11", t:"Local LLM Engineering", s:"must", sl:"CORE GENAI SKILL", b:[
+  {k:"cl", i:[["What is an LLM?",0],["Decoder-only architecture",0],["GPT-style models",0],["Parameters",0],["Context window",0],["Tokens",0],["Token IDs",0],["Embeddings",0],["Logits",0],["Next-token prediction",0],["Temperature",0],["Top-k",0],["Top-p",0],["Sampling",0],["KV cache — conceptual",0],["Inference",0]]},
+  {k:"cl", h:"DGX Spark — run open-source LLMs locally", i:[["Model size",0],["Context length",0],["Batch size",0],["Generation speed",0],["Tokens / sec",0],["Memory usage",0]]},
+  {k:"flow", h:"Benchmark", i:["Model","Prompt","Tokens/sec","Memory","Latency"]},
+  {k:"project", h:"Portfolio", i:["LLM benchmarking report"]}
+]},
+{n:"12", t:"Embeddings + Vector Search", s:"must", sl:"MUST-KNOW", b:[
+  {k:"cl", h:"Embeddings", i:[["Embedding models",0],["Dense vectors",0],["Semantic similarity",0],["Cosine similarity",0],["Chunk embeddings",0],["Query embeddings",0]]},
+  {k:"cl", h:"Vector Search", i:[["Vector database concept",0],["Similarity search",0],["Top-k retrieval",0],["Metadata filtering",0],["Indexing",0]]},
+  {k:"note", x:"Learn one practical vector database deeply — Chroma, FAISS, or Qdrant. Do not learn every vector database."}
+]},
+{n:"13", t:"RAG", s:"critical", sl:"CORE JOB SKILL", b:[
+  {k:"flow", h:"RAG pipeline", i:["DOCUMENTS","CHUNKING","EMBEDDINGS","VECTOR DATABASE","RETRIEVAL","CONTEXT","LLM","ANSWER"]},
+  {k:"cl", i:[["Document loading",0],["Chunking",0],["Chunk size",0],["Chunk overlap",0],["Embeddings",0],["Vector storage",0],["Retrieval",0],["Top-k",0],["Similarity search",0],["Metadata filtering",0],["Prompt construction",0],["Context injection",0],["RAG evaluation",0],["Hallucination",0],["Retrieval failure",0],["Context quality",0]]},
+  {k:"project", h:"Project 1 — Production-style RAG Assistant", i:["Document upload","Chunking","Embeddings","Vector database","Retrieval","LLM","Citations","Evaluation","API"], extra:"Use local LLM inference on DGX Spark. Ship with GitHub + README + architecture diagram + demo."}
+]},
+{n:"14", t:"LangChain + LlamaIndex", s:"good", sl:"FRAMEWORKS", b:[
+  {k:"cl", h:"LangChain", i:[["Models",0],["Prompts",0],["Chains",0],["Retrievers",0],["Tools",0],["Structured output",0],["Integration patterns",0]]},
+  {k:"cl", h:"LlamaIndex", i:[["Document ingestion",0],["Indexing",0],["Query engines",0],["Retrieval",0]]},
+  {k:"note", x:"Do not memorize frameworks. Understand the underlying architecture first — frameworks are implementation tools."}
+]},
+{n:"15", t:"Function Calling + Tools", s:"must", sl:"MUST-KNOW", b:[
+  {k:"cl", i:[["Tool calling",0],["Function schemas",0],["Structured arguments",0],["Tool execution",0],["Tool results",0],["Error handling",0],["Tool selection",0],["Tool permissions",0]]},
+  {k:"project", h:"Build tools", i:["Calculator","Search","File lookup","Database query","API call"]}
+]},
+{n:"16", t:"AI Agents", s:"must", sl:"MUST-KNOW", b:[
+  {k:"flow", h:"A plain LLM", i:["USER","LLM","ANSWER"]},
+  {k:"flow", h:"An agent", i:["USER","LLM","DECIDE","TOOL","OBSERVE","LLM","DECIDE","ANSWER"]},
+  {k:"cl", i:[["Agent concept",0],["ReAct",0],["Tool use",0],["Planning",0],["Observation",0],["State",0],["Memory",0],["Multi-step execution",0],["Failure handling",0]]},
+  {k:"project", h:"Project 2 — Tool-Using AI Agent", i:["Research Agent → Search → Read → Calculate → Summarize → Answer"]}
+]},
+{n:"17", t:"LangGraph", s:"must", sl:"MUST-KNOW", b:[
+  {k:"cl", i:[["Graph concept",0],["Nodes",0],["Edges",0],["State",0],["Conditional routing",0],["Loops",0],["Human-in-the-loop",0],["Checkpointing",0],["Agent orchestration",0]]},
+  {k:"flow", h:"Build a stateful agent workflow", i:["Research","Analyze","Write","Review","Improve","Final Answer"]}
+]},
+{n:"18", t:"Multi-Agent Systems", s:"good", sl:"ADVANCED", b:[
+  {k:"cl", i:[["Multi-agent architecture",0],["Agent roles",0],["Communication",0],["Shared state",0],["Supervisor pattern",0],["Router pattern",0],["Hub-and-spoke",0],["Parallel agents",0],["Failure handling",0]]},
+  {k:"project", h:"Project 3", i:["Research Agent + Writer Agent + Reviewer Agent + Supervisor"]}
+]},
+{n:"19", t:"MCP", s:"must", sl:"MODERN MUST-KNOW", b:[
+  {k:"cl", i:[["What MCP is",0],["Client",0],["Server",0],["Tools",0],["Resources",0],["Prompts",0],["Tool discovery",0],["Tool execution",0],["MCP architecture",0]]},
+  {k:"flow", h:"Build a custom MCP server", i:["Files","Database","Custom APIs","Tools"]},
+  {k:"note", x:"Connect it to a local LLM / agent, and add an MCP architecture diagram to the portfolio."}
+]},
+{n:"20", t:"LoRA / QLoRA / PEFT", s:"critical", sl:"CORE DGX ADVANTAGE", b:[
+  {k:"cl", i:[["Why fine-tuning",0],["Pretraining vs fine-tuning",0],["Full fine-tuning",0],["Parameter-efficient fine-tuning",0],["LoRA",0],["QLoRA",0],["Adapters",0],["Rank",0],["Trainable parameters",0],["Quantized base model",0],["Dataset preparation",0],["Training configuration",0],["Evaluation",0]]},
+  {k:"flow", h:"Project 4 — Fine-Tuned Domain LLM", i:["Dataset","Tokenizer","Base LLM","LoRA / QLoRA","Training","Evaluation","Inference","API"]},
+  {k:"callout", h:"Record everything", x:"Training time, GPU memory, parameters trained, dataset size, loss, evaluation results, tokens/sec — this becomes major interview material."}
+]},
+{n:"21", t:"Quantization + Inference Optimization", s:"must", sl:"MUST-KNOW", b:[
+  {k:"cl", i:[["Why quantization",0],["FP32",0],["FP16 / BF16",0],["INT8",0],["4-bit quantization",0],["Memory tradeoffs",0],["Accuracy tradeoffs",0],["Latency",0],["Throughput",0],["Batch size",0],["KV cache",0],["Quantized inference",0]]},
+  {k:"callout", h:"Benchmark", x:"Same model, FP16/BF16 vs quantized — measure memory, latency, tokens/sec, and quality."}
+]},
+{n:"22", t:"LLM Serving", s:"must", sl:"MUST-KNOW", b:[
+  {k:"cl", i:[["FastAPI",0],["REST APIs",0],["Request / response",0],["Streaming responses",0],["Async basics",0],["Batching",0],["Model loading",0],["GPU memory",0],["Concurrency",0],["Latency",0],["Throughput",0]]},
+  {k:"note", x:"Learn at least one serving stack deeply — vLLM, Hugging Face TGI, or Ollama for local development."},
+  {k:"flow", h:"Main goal", i:["CLIENT","API","MODEL SERVER","GPU","RESPONSE"]}
+]},
+{n:"23", t:"Docker + MLOps", s:"must", sl:"MUST-KNOW", b:[
+  {k:"cl", h:"Docker", i:[["Images",0],["Containers",0],["Dockerfile",0],["Volumes",0],["Networks",0],["Environment variables",0],["Docker Compose basics",0]]},
+  {k:"cl", h:"MLOps / LLMOps", i:[["Experiment tracking",0],["Model versioning",0],["Logging",0],["Monitoring",0],["Evaluation",0],["Reproducibility",0],["Configuration management",0]]},
+  {k:"note", x:"Learn MLflow enough for practical usage."}
+]},
+{n:"24", t:"Cloud", s:"good", sl:"SUPPORTING KNOWLEDGE", b:[
+  {k:"cl", i:[["Cloud fundamentals",0],["Compute",0],["Storage",0],["IAM",0],["Networking basics",0],["Containers",0],["GPU instances",0],["Deployment architecture",0]]},
+  {k:"cl", h:"AWS", i:[["EC2",0],["S3",0],["IAM",0],["Basic deployment",0]]},
+  {k:"note", x:"Optional: AWS ML certification prep — do not let it consume core GenAI learning time."}
+]},
+{n:"25", t:"AI System Design", s:"critical", sl:"VERY IMPORTANT FOR JOBS", b:[
+  {k:"flow", h:"RAG system", i:["Documents","Ingestion","Chunking","Embedding","Vector DB","Retriever","LLM","API"]},
+  {k:"flow", h:"Agent system", i:["User","API","Agent","Planner / LLM","Tools","State","Response"]},
+  {k:"flow", h:"Production LLM system", i:["Client","API Gateway","Application","Agent / RAG Layer","Model Server","GPU","Vector DB","Database","Monitoring"]},
+  {k:"cl", h:"Must-know tradeoffs", i:[["RAG vs fine-tuning",0],["Local LLM vs API",0],["Small model vs large model",0],["Latency vs quality",0],["Cost vs performance",0],["Context size vs latency",0],["Chunk size",0],["Retrieval quality",0],["Model quantization",0],["Batching",0],["Caching",0],["Streaming",0],["CPU vs GPU",0],["Single-agent vs multi-agent",0]]}
+]},
+{n:"26", t:"Evaluation", s:"must", sl:"MUST-KNOW", b:[
+  {k:"cl", h:"RAG evaluation", i:[["Retrieval accuracy",0],["Context relevance",0],["Answer correctness",0],["Faithfulness",0],["Hallucination rate",0]]},
+  {k:"cl", h:"Agent evaluation", i:[["Tool selection",0],["Task success",0],["Failure rate",0],["Latency",0],["Tool errors",0]]},
+  {k:"cl", h:"LLM evaluation", i:[["Accuracy",0],["Quality",0],["Latency",0],["Tokens / sec",0],["Memory",0],["Cost",0]]},
+  {k:"note", x:"Do not build AI systems without evaluation."}
+]},
+{n:"27", t:"Flagship Project", s:"critical", sl:"FINAL PROOF OF ABILITY", b:[
+  {k:"project", h:"Project 5 — Flagship AI System", i:["LLM","RAG","Vector database","Tool calling","Agents","LangGraph","MCP","Fine-tuned model","Quantization","API","Docker","Evaluation","Monitoring"]},
+  {k:"flow", h:"Example architecture", i:["USER","Frontend / API","AI Orchestrator","RAG + Agents (parallel)","LLM","Fine-Tuned Model","Inference Server","GPU"]}
+]}
+];
+
+const tracks = [
+{n:"LAB", t:"DGX Spark Master Lab", s:"lab", sl:"HARDWARE TRACK", b:[
+  {k:"cl", h:"Experiments", i:[["Neural network training",0],["CPU vs GPU benchmark",0],["CNN training",0],["Transformer inference",0],["Local LLM inference",0],["Embedding generation",0],["RAG experiments",0],["Agent + local LLM",0],["LoRA fine-tuning",0],["QLoRA fine-tuning",0],["Quantized inference",0],["Serving",0],["Stress testing",0],["Benchmarking",0]]},
+  {k:"note", x:"Track for every experiment: model, dataset, batch size, precision, GPU memory, training time, inference latency, tokens/sec, accuracy/quality, configuration, result, lessons learned."}
+]},
+{n:"DSA", t:"Data Structures & Algorithms", s:"lab", sl:"DO NOT LET IT BECOME A SECOND CURRICULUM", b:[
+  {k:"cl", h:"Start small", i:[["Arrays",0],["Strings",0],["Hash maps",0],["Stack",0],["Queue",0],["Linked list",0],["Binary search",0],["Sorting",0],["Trees",0],["Heap",0],["Graph basics",0],["BFS",0],["DFS",0]]},
+  {k:"note", x:"Target: 2–4 problems/week initially, then daily interview practice."}
+]},
+{n:"ENG", t:"Software Engineering", s:"lab", sl:"THROUGHOUT THE ROADMAP", b:[
+  {k:"cl", i:[["Clean Python",0],["Type hints",0],["Error handling",0],["Logging",0],["Testing",0],["Git branches",0],["Pull requests",0],["README writing",0],["API design",0],["Project structure",0],["Environment variables",0],["Configuration",0],["Docker",0]]}
+]}
+];
+
+const finalTargets = [
+"Build AI/ML systems from scratch","Understand neural networks and PyTorch","Train models on CPU/GPU",
+"Understand CNNs and basic computer vision","Understand NLP fundamentals","Understand Transformers deeply enough to implement/explain them",
+"Work with Hugging Face","Run open-source LLMs locally","Build RAG systems","Work with embeddings and vector databases",
+"Build tool-using AI agents","Build stateful agent workflows","Build MCP servers and clients",
+"Fine-tune open LLMs using LoRA/QLoRA","Quantize and optimize models","Serve LLMs through APIs",
+"Containerize AI applications","Monitor / evaluate AI systems","Design production AI architectures",
+"Deploy AI systems","Build a strong portfolio","Explain technical decisions in interviews",
+"Solve enough DSA for AI/ML engineering interviews"
+];
+
+const projects = [
+{pn:"Project 01", h:"Production RAG Assistant", i:["Embeddings","Vector search","Retrieval","LLM","Evaluation","API"]},
+{pn:"Project 02", h:"Tool-Using AI Agent", i:["Tool calling","Planning","Multi-step execution","Error handling"]},
+{pn:"Project 03", h:"Multi-Agent + MCP System", i:["LangGraph","Multiple agents","State","MCP","Custom tools"]},
+{pn:"Project 04", h:"Fine-Tuned Domain LLM", i:["Dataset preparation","LoRA/QLoRA","DGX Spark","Evaluation","Quantization","Inference"]},
+{pn:"Project 05 · Flagship", h:"Flagship Production AI System", i:["RAG","Agents","Tools","MCP","Fine-tuning","Serving","Docker","Evaluation","DGX Spark"], flagship:true}
+];
+
+const everyProject = ["Clear README","Problem statement","Architecture diagram","Technology stack","Installation","Usage","Screenshots / demo","Evaluation","Benchmarks","Design decisions","Tradeoffs","Limitations","Future improvements"];
+
+const framework = [
+["WHAT","Can I define it?"],["WHY","Can I explain why it exists?"],["HOW","Can I explain how it works?"],
+["IMPLEMENT","Can I build it?"],["DEBUG","Can I identify common failures?"],["TRADEOFF","Can I compare alternatives?"],
+["SYSTEM","Can I use it in a real architecture?"]
+];
+
+const topics = [
+{h:"ML", i:["Train/test split","Overfitting","Underfitting","Metrics","Regularization"]},
+{h:"Deep Learning", i:["Forward pass","Backpropagation","Activation","Loss","Optimizer","CNN","GPU"]},
+{h:"Transformers", i:["Attention","Self-attention","Multi-head attention","Positional encoding","Encoder/decoder","BERT vs GPT"]},
+{h:"LLM", i:["Tokenization","Embeddings","Context window","Generation","Sampling","Inference"]},
+{h:"RAG", i:["Chunking","Embeddings","Retrieval","Vector DB","RAG failures","Evaluation"]},
+{h:"Agents", i:["Tool calling","ReAct","State","LangGraph","Multi-agent","MCP"]},
+{h:"Fine-Tuning", i:["Fine-tuning","LoRA","QLoRA","Quantization","Evaluation"]},
+{h:"Production", i:["FastAPI","Docker","Model serving","Batching","Monitoring","Cloud","System design"]}
+];
+
+const depth = [
+{cls:"must", tag:"🔴 Must Know", h:"Build + Debug + Explain + Use", p:"Python, NumPy, PyTorch, Neural Networks, Transformers, Hugging Face, LLMs, Embeddings, RAG, Agents, LangGraph, MCP, LoRA/QLoRA, Quantization, Serving, Docker, Evaluation, AI System Design."},
+{cls:"good", tag:"🟡 Good To Know", h:"Understand the concept, use when necessary", p:"CNN architecture variations, RNN/LSTM, OpenCV, Object detection, MLflow, Cloud services, Advanced CV."},
+{cls:"opt", tag:"⚪ Optional / Research", h:"Not on the roadmap unless a project requires it", p:"Advanced mathematical proofs, research-level Transformer theory, reproducing papers, designing new architectures, advanced CV/generative research, deep theoretical optimization."}
+];
+
+const finalOrder = ["Completed Foundations","Activation Functions","Multi-Layer Neural Network","NumPy","PyTorch","CPU / GPU","CNN","NLP Fundamentals","Transformers","Hugging Face","Local LLMs","Embeddings","Vector Search","RAG","LangChain / LlamaIndex","Function Calling","AI Agents","LangGraph","Multi-Agent Systems","MCP","LoRA / QLoRA","Fine-Tuning","Quantization","LLM Serving","FastAPI","Docker","MLOps / LLMOps","Cloud","AI System Design","Evaluation","Flagship Project","Interviews","Job Applications"];
+
+/* ============================================================
+   RENDER HELPERS
+   ============================================================ */
+function esc(s){ return String(s); }
+
+function renderChecklist(items){
+  return `<ul class="checklist">${items.map(([t,d])=>
+    `<li class="check-item ${d?"done":""}" tabindex="0" role="checkbox" aria-checked="${d?"true":"false"}">
+       <span class="box" aria-hidden="true"></span><span class="txt">${esc(t)}</span>
+     </li>`).join("")}</ul>`;
+}
+function renderFlow(steps){
+  return `<div class="flow">${steps.map((s,idx)=>
+    `<span class="flow-step">${esc(s)}</span>` + (idx<steps.length-1 ? `<span class="flow-arrow" aria-hidden="true">→</span>` : "")
+  ).join("")}</div>`;
+}
+function renderBlock(b){
+  switch(b.k){
+    case "cl": return `<div class="block block-checklist">${b.h?`<h4 class="block-h">${esc(b.h)}</h4>`:""}${renderChecklist(b.i)}</div>`;
+    case "note": return `<div class="callout callout-note"><span class="callout-tag">Rule</span><p>${esc(b.x)}</p></div>`;
+    case "warn": return `<div class="callout callout-warn"><span class="callout-tag">${esc(b.h||"Do not")}</span><ul>${b.i.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div>`;
+    case "flow": return `<div class="block block-flow">${b.h?`<h4 class="block-h">${esc(b.h)}</h4>`:""}${renderFlow(b.i)}</div>`;
+    case "project": return `<div class="callout callout-project"><span class="callout-tag">${esc(b.h||"Project")}</span><ul class="chip-list">${b.i.map(t=>`<li>${esc(t)}</li>`).join("")}</ul>${b.extra?`<p class="project-extra">${esc(b.extra)}</p>`:""}</div>`;
+    case "callout": return `<div class="callout callout-highlight"><span class="callout-tag">${esc(b.h)}</span><p>${esc(b.x)}</p></div>`;
+    default: return "";
+  }
+}
+function renderPhase(p){
+  return `
+  <article class="phase" id="phase-${p.n}" data-status="${p.s}">
+    <span class="node"></span>
+    <div class="phase-top">
+      <div class="phase-title-wrap">
+        <span class="phase-num">PH.${p.n}</span>
+        <h3>${esc(p.t)}</h3>
+      </div>
+      <span class="badge" data-status="${p.s}">${esc(p.sl)}</span>
+    </div>
+    <div class="phase-progress">
+      <div class="track"><div class="fill" data-fill></div></div>
+      <div class="label"><span data-label>0 / 0 items</span></div>
+    </div>
+    ${p.b.map(renderBlock).join("")}
+  </article>`;
+}
+
+/* ============================================================
+   BUILD PAGE
+   ============================================================ */
+document.getElementById("spine").innerHTML = phases.map(renderPhase).join("");
+document.getElementById("tracksSpine").innerHTML = tracks.map(renderPhase).join("");
+
+document.getElementById("targetGrid").innerHTML = finalTargets.map(t=>`<li>${esc(t)}</li>`).join("");
+
+document.getElementById("projGrid").innerHTML = projects.map(pr=>`
+  <div class="proj-card ${pr.flagship?"flagship":""}">
+    <div class="pn">${esc(pr.pn)}</div>
+    <h4>${esc(pr.h)}</h4>
+    <ul>${pr.i.map(t=>`<li>${esc(t)}</li>`).join("")}</ul>
+  </div>`).join("");
+
+document.getElementById("everyProjectGrid").innerHTML = everyProject.map(t=>
+  `<li class="check-item"><span class="box" aria-hidden="true"></span><span class="txt">${esc(t)}</span></li>`).join("");
+
+document.getElementById("frameworkGrid").innerHTML = framework.map(([w,q])=>
+  `<div class="fw-card"><div class="w">${w}</div><div class="q">${esc(q)}</div></div>`).join("");
+
+document.getElementById("topicGrid").innerHTML = topics.map(t=>
+  `<div class="topic-card"><h4>${esc(t.h)}</h4><ul>${t.i.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+
+document.getElementById("depthGrid").innerHTML = depth.map(d=>
+  `<div class="depth-card ${d.cls}"><span class="tag">${d.tag}</span><h4>${esc(d.h)}</h4><p>${esc(d.p)}</p></div>`).join("");
+
+document.getElementById("orderList").innerHTML = finalOrder.map((t,idx)=>{
+  const isJob = idx===finalOrder.length-1;
+  return `<div class="order-item ${isJob?"job":""}"><span class="oi">${String(idx+1).padStart(2,"0")}</span><span>${esc(t)}${isJob?" — 🎯":""}</span></div>`;
+}).join("");
+
+/* jump nav */
+const jumpnav = document.getElementById("jumpnav");
+const navGroups = [
+  {label:"Overview", items:[["target","Final Target"]]},
+  {label:"Phases", items: phases.map(p=>[`phase-${p.n}`, `PH.${p.n} — ${p.t}`])},
+  {label:"Parallel Tracks", items: tracks.map(p=>[`phase-${p.n}`, p.t])},
+  {label:"Reference", items:[["portfolio","Portfolio Plan"],["interview","Interview Prep"],["depth","Depth Control"],["stop","Stop Rule"],["order","Final Order"]]}
+];
+jumpnav.innerHTML = `<option value="">Jump to…</option>` + navGroups.map(g=>
+  `<optgroup label="${g.label}">${g.items.map(([id,label])=>`<option value="${id}">${label}</option>`).join("")}</optgroup>`
+).join("");
+jumpnav.addEventListener("change", ()=>{
+  const target = document.getElementById(jumpnav.value);
+  if(target){ target.scrollIntoView({behavior:"smooth", block:"start"}); }
+  jumpnav.value = "";
+});
+
+/* ============================================================
+   PROGRESS ENGINE
+   ============================================================ */
+function updatePhaseProgress(phaseEl){
+  const items = phaseEl.querySelectorAll(".block-checklist .check-item");
+  if(items.length === 0){
+    const bar = phaseEl.querySelector("[data-fill]");
+    const label = phaseEl.querySelector("[data-label]");
+    if(bar) bar.parentElement.parentElement.style.display = "none";
+    return;
+  }
+  const done = phaseEl.querySelectorAll(".block-checklist .check-item.done").length;
+  const pct = Math.round((done/items.length)*100);
+  const bar = phaseEl.querySelector("[data-fill]");
+  const label = phaseEl.querySelector("[data-label]");
+  if(bar) bar.style.width = pct + "%";
+  if(label) label.textContent = `${done} / ${items.length} items — ${pct}%`;
+}
+function updateOverallProgress(){
+  const items = document.querySelectorAll(".block-checklist .check-item");
+  const done = document.querySelectorAll(".block-checklist .check-item.done").length;
+  const pct = items.length ? Math.round((done/items.length)*100) : 0;
+  document.getElementById("overallFill").style.width = pct + "%";
+  document.getElementById("overallPct").textContent = pct + "%";
+  document.getElementById("railFill").style.width = pct + "%";
+}
+function toggleItem(el){
+  el.classList.toggle("done");
+  el.setAttribute("aria-checked", el.classList.contains("done") ? "true" : "false");
+  const phaseEl = el.closest(".phase");
+  if(phaseEl) updatePhaseProgress(phaseEl);
+  updateOverallProgress();
+}
+document.addEventListener("click", (e)=>{
+  const item = e.target.closest(".block-checklist .check-item");
+  if(item) toggleItem(item);
+});
+document.addEventListener("keydown", (e)=>{
+  if((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("check-item")){
+    e.preventDefault();
+    toggleItem(e.target);
+  }
+});
+
+document.querySelectorAll(".phase").forEach(updatePhaseProgress);
+updateOverallProgress();
+
+/* reveal on scroll */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){ entry.target.classList.add("in"); io.unobserve(entry.target); }
+  });
+}, {threshold:0.08, rootMargin:"0px 0px -40px 0px"});
+document.querySelectorAll(".phase").forEach(p=>io.observe(p));
+
+/* back to top */
+const toTop = document.getElementById("toTop");
+window.addEventListener("scroll", ()=>{
+  toTop.classList.toggle("show", window.scrollY > 700);
+}, {passive:true});
+toTop.addEventListener("click", ()=> window.scrollTo({top:0, behavior:"smooth"}));
+</script>
+</body>
+</html>

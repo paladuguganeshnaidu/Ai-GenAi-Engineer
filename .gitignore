@@ -18,6 +18,12 @@ ENV/
 # VS Code
 .vscode/
 
+# Node dependencies and tooling
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
 # Environment variables and secrets
 .env
 .env.*
@@ -53,3 +59,4 @@ wandb/
 # Local data
 data/
 datasets/
+Projects/ResumeShortlister/Training Data/candidates.csv
