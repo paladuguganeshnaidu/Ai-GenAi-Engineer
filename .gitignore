@@ -66,3 +66,6 @@ Projects/ResumeShortlister/Training Data/candidates.csv
 !Data/**
 Data/ResumeShortlister/Training/candidates.csv
 Data/ResumeShortlister/Training/__pycache__/
+D:/GITHUB REPOs/GEN-AI/Data/titanic/train.csv
+D:/GITHUB REPOs/GEN-AI/Data/titanic/test.csv
+D:/GITHUB REPOs/GEN-AI/Data/titanic/gender_submission.csv
