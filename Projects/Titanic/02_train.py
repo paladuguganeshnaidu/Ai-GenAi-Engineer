@@ -78,7 +78,7 @@ optimizer = torch.optim.Adam(
 # 7. Training configuration
 # ==========================================
 
-epochs = 7_800
+epochs = 20_000
 
 
 # ==========================================
@@ -122,7 +122,7 @@ for epoch in range(epochs):
 
     # Print every 1000 epochs
 
-    if epoch%100 == 0:
+    if epoch%1000 == 0:
 
         print(
             f"Epoch [{epoch + 1}/{epochs}] "
